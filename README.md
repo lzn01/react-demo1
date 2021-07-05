@@ -1,70 +1,91 @@
-# Getting Started with Create React App
+## 1 起步
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+安装 yarn global add create-react-app
+创建 create-react-app react-demo-1
+```
 
-## Available Scripts
+- React元素
 
-In the project directory, you can run:
+  createElement的返回值element可以代表一个div
 
-### `yarn start`
+  但element并不是真正的div（DOM）对象
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  所以我们一般称element为虚拟DOM对象
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- () => React元素
 
-### `yarn test`
+  返回element的函数，也可以代表一个div
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+  这个函数可以多次执行，每次得到最新的虚拟div
 
-### `yarn build`
+  React会对比两个虚拟div，找出不同，局部更新视图
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  找不同的算法叫做`DOM Diff`算法
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 2 使用JSX
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- 方法一：CDN
 
-### `yarn eject`
+  引入`balel.min.js`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  把`<script>`改成`<script type="text/babel">`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+  不支持src
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+- 方法二：使用create-react-app
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+  全局安装
 
-## Learn More
+  ```
+  yarn global add create-react-app
+  ```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+  初始化目录
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  ```
+  create-react-app react-demo-1
+  ```
 
-### Code Splitting
+  进入目录
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+  ```
+  cd react-demo-1
+  ```
 
-### Analyzing the Bundle Size
+  开始开发
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+  ```
+  yarn start
+  ```
 
-### Making a Progressive Web App
+## 3 使用JSX的注意事项
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- 注意`className`
 
-### Advanced Configuration
+- 插入变量 标签里所有的JS代码都要用{}包起来
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- 习惯return后面加()
 
-### Deployment
+  
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 小结
 
-### `yarn build` fails to minify
+- 引入React& ReactDOM
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - CDN方式：react.js、react-dom.js、babel.js
+
+  - 直接引用：import React from 'react'
+
+- React.createElement
+
+  - 创建虚拟DOM对象
+  - 函数的作用：多次创建虚拟DOM对象
+  - DOM Diff
+
+- JSX
+
+  - 将XML转译为React.createElement
+  - 使用{}插入JS代码
+  - Create-react-app默认将JS当做JSX处理
+  - 条件判断 循环要用原生JS实现
